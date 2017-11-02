@@ -98,7 +98,9 @@ def process():
         )
         sys.exit(1)
     group = groups[0]
-    entries = db.find_entries_by_title(args.entrytitle)
+    ## Only grab from root
+    path = "".join([db.root_group.path, args.entrytitle])
+    entries = db.find_entries_by_path(path)
     if len(entries) == 0:
         print("Entry by that title does not exist", file=sys.stderr)
     for entry in entries:
